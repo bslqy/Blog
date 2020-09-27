@@ -1,6 +1,6 @@
 const blog = require('../controller/blog')
 // Controller 用于返回真实数据
-const {getList,getDetail,newBlog,updateBlog} = require('../controller/blog')
+const {getList,getDetail,newBlog,updateBlog,delBlog} = require('../controller/blog')
 // resModel 用于返回成功/失败的Message Code
 const {SuccessModel,ErrorModel} = require('../model/resModel')
 
@@ -49,8 +49,12 @@ const handleBlogRouter = (req,res) => {
     // 删除一篇博客
 
     if(method === 'POST' && req.path ==='/api/blog/del'){
-        return{
-            msg:'这是删除博客的接口'
+        const result = delBlog(id)
+
+        if(result){
+            return new SuccessModel()
+        } else{
+            return new ErrorModel("删除博客失败")
         }
     }
 
