@@ -1,6 +1,11 @@
+/*
+This layer is used to control the URL level logic
+*/
+
 const blog = require('../controller/blog')
-// Controller 用于返回真实数据
+// Controller 用于具体数据层的操作
 const {getList,getDetail,newBlog,updateBlog,delBlog} = require('../controller/blog')
+
 // resModel 用于返回成功/失败的Message Code
 const {SuccessModel,ErrorModel} = require('../model/resModel')
 

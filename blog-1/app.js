@@ -16,7 +16,7 @@ const getPostData = (req) => {
             return 
 
         }
-        let postData =''
+        let postData = ''
         req.on('data',chunck => {
             postData += chunck.toString()
         })
@@ -43,7 +43,7 @@ const serverHandle = (req,res) => {
     req.path = url.split('?')[0]
 
     // 解析query
-    req.query = querystring.parse(url.split('?')[1])
+    req.query = querystring.parse(url.split('?')[0])
 
     // 1. 处理PostData
     
@@ -66,7 +66,7 @@ const serverHandle = (req,res) => {
         res.end(
             JSON.stringify(userData)
         )
-        end
+        
     }
 
     // 4. 未命中路由
@@ -83,4 +83,3 @@ const serverHandle = (req,res) => {
 }
 module.exports = serverHandle
 // env: process.env.NODE_ENV
-
