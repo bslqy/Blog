@@ -16,9 +16,9 @@ const getPostData = (req) => {
             return 
 
         }
-        let postData = ''
-        req.on('data',chunk => {
-            postData += chuck.toString()
+        let postData =''
+        req.on('data',chunck => {
+            postData += chunck.toString()
         })
         req.on('end', () => {
             if (!postData){
@@ -43,7 +43,7 @@ const serverHandle = (req,res) => {
     req.path = url.split('?')[0]
 
     // 解析query
-    req.query = querystring.parse(url.split('?')[0])
+    req.query = querystring.parse(url.split('?')[1])
 
     // 1. 处理PostData
     

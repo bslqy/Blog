@@ -18,7 +18,7 @@ const getList = (author,keyword) => {
 }
 
 
-const getDetail = (author,keyword) => {
+const getDetail = (id) => {
     return [
         {
             id:1,
@@ -37,7 +37,30 @@ const getDetail = (author,keyword) => {
     ]
 }
 
+const newBlog = (blogData ={}) =>{
+
+// blogData 是一个博客对象，包含 title content 属性
+console.log('newBlog blogData...', blogData)
+
+return {
+    id: 3 // 返回的ID
+ }
+}
+
+const updateBlog = (id,blogData = {}) => {
+    // id 就是要更新博客的id
+    // blogData 是一个博客对象, 包含 title content 属性
+    console.log('update blog',id,blogData)
+
+    return true
+
+}
+
+
+
 module.exports = {
     getList,
-    getDetail
+    getDetail,
+    newBlog,
+    updateBlog
 }
