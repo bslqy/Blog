@@ -52,14 +52,22 @@ const serverHandle = (req,res) => {
     // 接下来所有的路由都可以在req.body里面获取postData的数据
 
 
-    // 2. 处理Blog路由
-    const blogData = handleBlogRouter(req,res)
-    if (blogData){
-        res.end(
-            JSON.stringify(blogData)
-        )
+    // 2. 处理Blog路由. 因为返回的是promise所以必须要用then
+    const blogResult = handleBlogRouter(req,res)
+    if (blogResult){
+        blogResult.then( blogData => {
+            if (blogData){
+                res.end(
+                    JSON.stringify(blogData)
+                )
+            }
+
+        })
         return
+
     }
+  
+    
     // 3. 处理User路由
     const userData = handleUserRouter(req,res)
     if(userData){
