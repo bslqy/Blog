@@ -38,7 +38,8 @@ const content = blogData.content
 const author = blogData.author
 const createTime = Date.now()
 
-const sql = `INSERT INTO blogs (title, content, createtime, author) values ('${title}','${content}','${createTime}','${author}')`
+const sql = `INSERT INTO blogs (title, content, createtime, author) 
+            values ('${title}','${content}','${createTime}','${author}') `
 return exec(sql).then(insertData => {
     console.log('insertData is ',insertData)
 

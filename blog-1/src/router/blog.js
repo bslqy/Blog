@@ -42,8 +42,8 @@ const handleBlogRouter = (req,res) => {
     // 新建一篇博客
     if(method === 'POST' && req.path ==='/api/blog/new'){
         // 先使用假数据，传入author.
-        const author = 'zhangsan'
-        req.body.author = author
+        // const author = 'zhangsan'
+        // req.body.author = author
         const  result = newBlog(req.body)
 
         return result.then(data => {
@@ -56,7 +56,7 @@ const handleBlogRouter = (req,res) => {
     if(method === 'POST' && req.path ==='/api/blog/update'){
         
         const result = updateBlog(id,req.body)
-        result.then(value => {
+        return result.then(value => {
             if(value){
                 return new SuccessModel()
             }
@@ -75,7 +75,7 @@ const handleBlogRouter = (req,res) => {
     if(method === 'POST' && req.path ==='/api/blog/del'){
         const author = 'lisi'
         const result = delBlog(id,author)
-        result.then(val => {
+        return result.then(val => {
             if(val){
                 return new SuccessModel()
             } else{
