@@ -69,11 +69,14 @@ const serverHandle = (req,res) => {
   
     
     // 3. 处理User路由
-    const userData = handleUserRouter(req,res)
-    if(userData){
-        res.end(
-            JSON.stringify(userData)
-        )
+    const userResult = handleUserRouter(req,res)
+    if(userResult){
+        userResult.then(userData =>{
+            if(userData){
+                res.end(JSON.stringify(userData))
+            }
+        })
+        return 
         
     }
 
