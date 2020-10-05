@@ -13,7 +13,7 @@ const {SuccessModel,ErrorModel} = require('../model/resModel')
 const loginCheck = (req) =>{
     if(!req.session.username){
         return Promise.resolve(
-            new ErrorModel("尚未登录")
+            new ErrorModel("Not logged in yet")
         )
     }
 
@@ -92,14 +92,15 @@ const handleBlogRouter = (req,res) => {
             return loingCheckResult
         }
 
-        
+        console.log('body is !!!',req.body)
         const result = updateBlog(id,req.body)
+        
         return result.then(value => {
             if(value){
                 return new SuccessModel()
             }
             else{
-                return new ErrorModel("更新博客失败")
+                return new ErrorModel("Failed to update blog")
             }
             
 
