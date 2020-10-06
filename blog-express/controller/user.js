@@ -3,7 +3,7 @@ This layer is used to control the Data  transfer
 */
 
 const {exec, escape} = require('../db/mysql')
-const {genPassword } = require ('../utils/cryp')
+const {genPassword } = require ('../utils/crypt')
 
 
 const login = (username,password) => {
