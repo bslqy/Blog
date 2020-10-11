@@ -1,6 +1,8 @@
 const express = require('express')
+var session = require('express-session')
 
 const  app = express()
+app.use(session({secret: 'keyboard cat'}))
 
 
 app.use((req,res,next) => {
@@ -68,6 +70,18 @@ app.post('/api/get-post-data',(req,res,next) =>{
         errno:0,
         data: req.body
     })
+
+})
+
+app.post('/api/set-session',(req,res,next) =>{
+    console.log('post /api/get-post-data')
+    req.session({
+        a:1,
+        b:2
+    })
+    res.json(req.session)
+
+    next()
 
 })
 

@@ -19,4 +19,3 @@ module.exports= {
     genPassword
 }
 
-console.log(genPassword(456))

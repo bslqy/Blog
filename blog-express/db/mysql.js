@@ -1,7 +1,6 @@
 const mysql = require('mysql')
 
 const {MYSQL_CONF} = require('../conf/db')
-const resModel = require('../model/resModel')
 
 // create connection string
 

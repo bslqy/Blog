@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session')
+// 设置Redis存储
+const RedisStore = require('connect-redis')(session)
 
 
 // 不同路由文件进行拆分
@@ -21,6 +24,28 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const redisClient = require('./db/redis')
+const sessionStore = new RedisStore({
+  client: redisClient
+})
+// 使用Session中间件
+app.use(session({
+
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie:{
+    path: '/',
+    httpOnly : true,
+    maxAge: 24 * 60 * 60 * 1000
+
+  }
+  // store: sessionStore
+
+  //cookie: { secure: true }   /*secure https这样的情况才可以访问cookie*/
+}))
+
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // 使用路由文件
@@ -43,6 +68,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  // res.json({ error: err })
 });
 
 module.exports = app;
